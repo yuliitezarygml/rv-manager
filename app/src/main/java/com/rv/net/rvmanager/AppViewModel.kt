@@ -144,30 +144,34 @@ class AppViewModel(
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onRefreshEvent(event: RefreshEvent) {
-        println("onRefreshEvent started")
+        println("AppViewModel: Received RefreshEvent")
 
         viewModelScope.launch {
+            println("AppViewModel: Starting refresh coroutine")
             try {
                 // Clear download table first
 //                rvDownloader.clearDownloadTable()
 
-                println("Starting app refresh sequence")
+                println("AppViewModel: Starting app refresh sequence")
                 ToastUtil.showSmallToast(context, "Refresh...")
                 // Create a coroutine scope that waits for all operations
                 coroutineScope {
                     // Load apps and wait for completion
+                    println("AppViewModel: Calling loadAndSortApps(forceRefresh = true)")
                     loadAndSortApps(forceRefresh = true)
+                    println("AppViewModel: loadAndSortApps completed")
 
-                    println("Apps loaded successfully, starting version check")
+                    println("AppViewModel: Apps loaded successfully, starting version check")
 
                     // Now check versions after apps are fully loaded
                     checkAppVersions()
                 }
 
-                println("onRefreshEvent completed successfully - all operations done")
+                println("AppViewModel: onRefreshEvent completed successfully - all operations done")
 
             } catch (e: Exception) {
-                println("Error during refresh: ${e.message}")
+                println("AppViewModel: Error during refresh: ${e.message}")
+                e.printStackTrace()
             }
         }
     }

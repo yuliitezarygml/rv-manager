@@ -61,6 +61,12 @@ fun AppInfoCard(app: AppItem) {
                     model = ImageRequest.Builder(context)
                         .data(app.logo)
                         .crossfade(true)
+                        .listener(onError = { _, result ->
+                            println("Coil Error: Failed to load image for ${app.title} from ${app.logo}. Error: ${result.throwable.message}")
+                            result.throwable.printStackTrace()
+                        }, onSuccess = { _, result ->
+                             println("Coil Success: Loaded image for ${app.title} from ${app.logo}")
+                        })
                         .build(),
                     contentDescription = "${app.title} icon",
                     modifier = Modifier.size(64.dp)

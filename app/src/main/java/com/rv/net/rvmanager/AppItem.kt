@@ -75,7 +75,7 @@ data class JsonAppResponse(
  * Handles fetching and managing app list data
  */
 object AppItemList {
-    private const val BASE_URL = "https://rv.net/"
+    private const val BASE_URL = "https://raw.githubusercontent.com/yuliitezarygml/yuliitezarygml/refs/heads/main/"
     private const val CACHED_APP_LIST_KEY = "cached_app_list"
 
     // API endpoints for different architectures
@@ -101,6 +101,11 @@ object AppItemList {
      * Get appropriate API URL based on device architecture
      */
     private fun getApiUrl(): String {
+        // Always use the fallback URL for simplicity with a single JSON file
+        println("AppItemList: Using fallback URL: $FALLBACK_URL")
+        return FALLBACK_URL
+
+/*
         val supportedAbis = getSupportedAbis()
         println("Supported ABIs: ${supportedAbis.joinToString()}")
 
@@ -111,48 +116,64 @@ object AppItemList {
             supportedAbis.contains("x86_64") -> X86_64_URL
             else -> FALLBACK_URL
         }
+*/
     }
 
     /**
      * Fetch app list from server or cache
      */
     suspend fun getAppList(context: Context, forceRefresh: Boolean = false): List<AppItem> = withContext(Dispatchers.IO) {
-        println("Getting app list, forceRefresh: $forceRefresh")
+        println("AppItemList: Getting app list, forceRefresh: $forceRefresh")
 
         if (!forceRefresh) {
             // Try loading from cache first
             loadCachedAppList(context)?.let {
+                println("AppItemList: Loaded ${it.size} apps from cache.")
                 return@withContext it
             }
+            println("AppItemList: Cache empty or not used.")
+        } else {
+            println("AppItemList: Force refresh requested, skipping cache.")
+            // Clear cache on force refresh might be a good idea?
+             SharedPreferencesUtil.saveString(CACHED_APP_LIST_KEY, "") // Clear cache
+             println("AppItemList: Cache cleared due to force refresh.")
         }
 
         // Determine API URL based on device architecture
         val apiUrl = getApiUrl()
-        println("Using API URL: $apiUrl")
+        println("AppItemList: Using API URL: $apiUrl")
 
         try {
             // Fetch and parse JSON from API
+            println("AppItemList: Fetching JSON from $apiUrl")
             val jsonString = URL(apiUrl).readText()
+            println("AppItemList: Successfully fetched JSON string (length: ${jsonString.length}).")
             val json = Json {
                 ignoreUnknownKeys = true
                 coerceInputValues = true
             }
+            println("AppItemList: Parsing JSON string...")
             val response = json.decodeFromString<JsonAppResponse>(jsonString)
+            println("AppItemList: Successfully parsed JSON response.")
 
             // Convert to AppItems
             val appList = response.packages.map { pkg ->
                 AppItem.fromJsonPackage(pkg)
             }
 
+            println("AppItemList: Mapped ${appList.size} AppItems from JSON.")
+
             // Cache the new list
             cacheAppList(context, appList)
 
-            println("Successfully fetched ${appList.size} apps")
+            println("AppItemList: Successfully fetched and processed ${appList.size} apps.")
             appList
 
         } catch (e: Exception) {
-            println("Error fetching app list: ${e.message}")
-            emptyList()
+            // Log the specific error
+            println("AppItemList: Error fetching or parsing app list from $apiUrl: ${e.javaClass.simpleName} - ${e.message}")
+            e.printStackTrace() // Print stack trace for more details
+            emptyList() // Return empty list on error
         }
     }
 

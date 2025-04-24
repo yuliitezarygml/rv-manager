@@ -1,0 +1,14 @@
+{
+  "packages": [
+    {
+      "appName": "Instagram",
+      "androidPackageName": "com.instagram.android",
+      "latestVersionCode": "359.0.0.59.89",
+      "appShortDescription": "Instagram with additional features",
+      "requireMicroG": false,
+      "latestVersionUrl": "https://github.com/yuliitezarygml/rv-manager/releases/download/app/InstaFlow_V22_Principal.apk",
+      "icon": "https://raw.githubusercontent.com/yuliitezarygml/yuliitezarygml/refs/heads/main/ic_instagram.svg",
+      "index": 1
+    }
+  ]
+}

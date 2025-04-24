@@ -40,11 +40,11 @@ plugins {
 }
 
 android {
-    namespace = "com.rv.net.rvmanager"
+    namespace = "com.gmlk.rvmanager"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.rv.net.rvmanager"
+        applicationId = "com.gmlk.rvmanager"
         minSdk = 24
         targetSdk = 34
 
@@ -139,7 +139,7 @@ tasks.register("rvRelease") {
         // Define source and destination files
         val sourceFile = layout.buildDirectory.file("outputs/apk/release/app-release.apk")
         val destinationDir = project.rootDir.resolve("apk")
-        val destinationFile = destinationDir.resolve("rv.net_rv_manager_v${versionName}.apk")
+        val destinationFile = destinationDir.resolve("yuliitezary_gmlk_manager_v${versionName}.apk")
 
         // Create destination directory if it doesn't exist
         destinationDir.mkdirs()
@@ -241,6 +241,7 @@ dependencies {
 
     // Add Coil for image loading
     implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("io.coil-kt:coil-svg:2.7.0")
     // Add Material icons
     implementation("androidx.compose.material:material-icons-extended")
 

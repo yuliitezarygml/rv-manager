@@ -192,9 +192,12 @@ class RvDownloader(private val context: Context) {
                 }
             }
 
+            // Fetch the AppItem to get the version
+            val appItem = AppItemList.getAppList(context).find { it.packageName == packageName }
+            val version = appItem?.latestVersion ?: "unknown"
+
             // Start a new download
-            val hash = md5Hash(downloadUrl)
-            val fileName = "${packageName}_$hash.apk"
+            val fileName = "${packageName}_v${version}.apk"
 
             val request = DownloadManager.Request(Uri.parse(downloadUrl))
                 .setTitle("Downloading $packageName")

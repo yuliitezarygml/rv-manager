@@ -91,7 +91,7 @@ fun RVManagerApp(context: Context, viewModel: AppViewModel = AppViewModel(contex
         ) {
             item {
                 Text(
-                    "RV Manager by rv.net",
+                    "GMLK Manager by yuliitezary",
                     style = MaterialTheme.typography.labelMedium,
                     color = Color(0xFF3295E3),
                     modifier = Modifier
@@ -117,7 +117,7 @@ fun RVManagerApp(context: Context, viewModel: AppViewModel = AppViewModel(contex
                 ) {
                     // Ko-fi support button
                     Button(
-                        onClick = { launchUrl("https://ko-fi.com/rvmanager") },
+                        onClick = { launchUrl("https://ko-fi.com/yuliitezary") },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF4285F4),
                             contentColor = Color.White  // This sets the default color for all content inside button
@@ -141,7 +141,7 @@ fun RVManagerApp(context: Context, viewModel: AppViewModel = AppViewModel(contex
 
                     // Website button
                     Button(
-                        onClick = { launchUrl("https://rv.net") },
+                        onClick = { launchUrl("https://www.instagram.com/yuliitezary.m_d/?next=%2F") },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF3295E3),
                             contentColor = Color.White  // This sets the default color for all content inside button
@@ -157,14 +157,14 @@ fun RVManagerApp(context: Context, viewModel: AppViewModel = AppViewModel(contex
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            "Visit rv.net",
+                            "Visit developer",
                             style = MaterialTheme.typography.labelLarge,
                             color = Color.White  // Explicitly set text color to white
                         )
                     }
                     // Github button
                     Button(
-                        onClick = { launchUrl("https://github.com/rvapps/rvmanager") },
+                        onClick = { launchUrl("https://github.com/orgs/GMLK-DEVELOPER/repositories") },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF3295E3),
                             contentColor = Color.White  // This sets the default color for all content inside button
@@ -180,7 +180,7 @@ fun RVManagerApp(context: Context, viewModel: AppViewModel = AppViewModel(contex
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            "Source code",
+                            "My work",
                             style = MaterialTheme.typography.labelLarge,
                             color = Color.White  // Explicitly set text color to white
                         )

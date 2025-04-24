@@ -10,14 +10,7 @@ object ToastUtil {
     }
 
     fun showSmallToast(context: Context, message: String, duration: Int = Toast.LENGTH_SHORT) {
-        val toast = Toast.makeText(context, message, duration)
-        val view = toast.view
-        view?.let {
-            val textView = it.findViewById<TextView>(android.R.id.message)
-            textView?.textSize = 8f  // Set the desired text size here
-        }
-
-        toast.show()
+        Toast.makeText(context, message, duration).show()
     }
 
     fun showPopup(context: Context, title: String, message: String) {
