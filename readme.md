@@ -8,7 +8,7 @@ For more information about the official ReVanced project, please visit their web
 
 
 
-# RV Manager 3.0
+# RV Manager 3.1
 
 A lightweight Android application that helps users manage, update, download, and uninstall applications efficiently. Built with modern Android development practices using Kotlin and Jetpack Compose.
 
