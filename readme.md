@@ -22,7 +22,7 @@ A lightweight Android application that helps users manage, update, download, and
 - **Adaptive Icons**: Modern Android adaptive icon support
 - **Background Updates**: Automatic background version checking
 
-## Tech Stack
+##1 Tech Stack
 
 - Kotlin
 - Jetpack Compose
